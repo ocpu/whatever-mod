@@ -1,5 +1,6 @@
 package io.opencubes.expandablestorage.capabilities
 
+import io.opencubes.expandablestorage.capability
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
@@ -33,7 +34,7 @@ class InventoryProvider(private val inventory: ItemStackHandler,
      * @param facing
      */
     @JvmStatic fun fromStack(stack: ItemStack, facing: EnumFacing) =
-        stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)
+        stack.capability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing)
 
     /**
      * Get the associated inventory from [stack] with null facing.
@@ -41,6 +42,6 @@ class InventoryProvider(private val inventory: ItemStackHandler,
      * @param stack
      */
     @JvmStatic fun fromStack(stack: ItemStack) =
-        stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
+        stack.capability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
   }
 }

@@ -5,8 +5,14 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.common.capabilities.Capability
+import net.minecraftforge.common.capabilities.ICapabilityProvider
+import java.util.*
+import java.util.function.Supplier
 
 
 inline fun <reified T : Item> EntityPlayer.heldItemStackOfTypeOrEmpty() =
@@ -77,3 +83,8 @@ object ModelLoader {
       setCustomModelResourceLocation(block, 0)
 }
 
+fun <T> ICapabilityProvider.capability(capability: Capability<T>, facing: EnumFacing?) =
+    if (hasCapability(capability, facing)) Optional.ofNullable(Supplier { getCapability(capability, facing)!! })
+    else Optional.empty()
+
+val NBTTagCompound?.safe: NBTTagCompound get() = this ?: NBTTagCompound()

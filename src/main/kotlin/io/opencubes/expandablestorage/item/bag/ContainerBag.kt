@@ -14,19 +14,21 @@ import net.minecraft.item.ItemStack
 class ContainerBag(playerInv: InventoryPlayer, bag: ItemStack, private val position: Int) : ContainerBase() {
 
   init {
-    val inventory = InventoryProvider.fromStack(bag)!!
+    val inventory = InventoryProvider.fromStack(bag).get().get()
 
-    buildInventoryGrid(inventory, gridHeight = 5, startX = 8, startY = 18)
-    buildInventoryGrid(playerInv, indexOffset = 9, gridHeight = 3, startX = 8, startY = 122)
-    buildInventoryGrid(startX = 8, startY = 180) {i, x, y ->
+    buildInventoryGrid(inventory, gridHeight = 5, startX = 30, startY = 18)
+    buildInventoryGrid(playerInv, indexOffset = 9, gridHeight = 3, startX = 30, startY = 122)
+    buildInventoryGrid(startX = 30, startY = 180) { i, x, y ->
       if (i == position) SlotLocked(playerInv, i, x, y)
       else Slot(playerInv, i, x, y)
     }
+    addSlotToContainer(Slot(playerInv, 40, 8, 180))
   }
 
   override fun canInteractWith(playerIn: EntityPlayer?) = true
 
   override fun transferStackInSlot(player: EntityPlayer, slotIndex: Int): ItemStack {
+    println(slotIndex)
     val slot = this.getSlot(slotIndex)
 
     if (!slot.canTakeStack(player))
@@ -38,7 +40,7 @@ class ContainerBag(playerInv: InventoryPlayer, bag: ItemStack, private val posit
     val stack = slot.stack
     val newStack = stack.copy()
 
-//    if (InventoryBlacklist.INSTANCE.isBlacklisted(slot.stack))
+//    if (ItemBag.isBlacklisted(slot.stack))
 //      return ItemStack.EMPTY
     if (slotIndex < ItemBag.size) {
       if (!this.mergeItemStack(stack, ItemBag.size, this.inventorySlots.size, true))
