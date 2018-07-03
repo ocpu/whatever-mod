@@ -41,6 +41,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.event.world.BlockEvent
 import net.minecraftforge.event.world.WorldEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.registries.*
 
 @SubscribeEvent
@@ -194,6 +195,8 @@ open class GuiHandler(private val values: Array<out IGui>) : IGuiHandler {
     in 0 until values.size -> values[ID].container(player, world, x, y, z)
     else -> null
   }
+
+  fun register(mod: Any = values[0].mod) = NetworkRegistry.INSTANCE.registerGuiHandler(mod, this)
 }
 
 enum class Interface : IGui {

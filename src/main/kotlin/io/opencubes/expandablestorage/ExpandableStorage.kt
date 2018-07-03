@@ -38,7 +38,7 @@ object ExpandableStorage {
   @EventHandler
   fun preInit(e: PreInitEvent) {
     CapabilityWorldPickupUpgrade.register()
-    NetworkRegistry.INSTANCE.registerGuiHandler(this, Interface)
+    Interface.register()
     println(ExpandableStorageBlocks.pipe.tileEntityClass.simpleName
         .replace("TileEntity", "")
         .replace("([A-Z])".toRegex(), "_$1")
