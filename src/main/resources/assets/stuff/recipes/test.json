@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "AAA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:glass",
+      "data": 0
+    },
+    "A": {
+      "item": "minecraft:stone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "stuff:solar_generator"
+  }
+}

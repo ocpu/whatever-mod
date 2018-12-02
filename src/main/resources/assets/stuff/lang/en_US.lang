@@ -1,0 +1,7 @@
+itemGroup.stuff=Stuff
+
+item.stuff.energy_cell.name=Energy Cell
+item.stuff.screw_driver.name=Screw Driver
+
+tile.stuff.solar_generator.name=Solar Generator
+tile.stuff.energy_furnace.name=Energy Furnace
